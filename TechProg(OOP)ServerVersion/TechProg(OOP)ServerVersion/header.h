@@ -12,6 +12,7 @@ public:
 	static type* In(ifstream &ifst, type *current);				//Для ввода последующих эл-ов
 	virtual int * InData(ifstream &ifst) = 0;					// ввод с учетом типа объекта
 	virtual void Out(ofstream &ofst, type *current) = 0;		// вывод с учетом типа объекта
+	virtual int SumOfElements(type *current) = 0;
 
 	int *mass;
 	type *next;
@@ -40,6 +41,7 @@ public:
 	// переопределяем интерфейс класса
 	int * InData(ifstream &ifst); // ввод
 	void Out(ofstream &ofst, type *current); // вывод
+	int SumOfElements(type *current);
 
 	diagonal() {} // создание без инициализации.
 };
@@ -52,5 +54,7 @@ public:
 	// переопределяем интерфейс класса
 	int * InData(ifstream &ifst); // ввод
 	void Out(ofstream &ofst, type *current); // вывод
+	int SumOfElements(type *current);
+
 	matrix() {} // создание без инициализации.
 };
