@@ -71,7 +71,7 @@ type* type::In(ifstream &ifst, type *current)
 	default:
 		return 0;
 	}
-
+	ifst >> temporary->HowToOut;
 	if (current == NULL)
 	{
 		temporary->mass = temporary->InData(ifst);
@@ -104,28 +104,33 @@ int * diagonal::InData(ifstream &ifst)
 
 void diagonal::Out(ofstream &ofst, type *current)
 {
-	ofst << "It's simple matrix " << size << "x" << size << endl;
+	ofst << "It's Diagonal matrix " << size << "x" << size << endl;
 
-	for (int i = 0; i < size; i++)
-	{
-		int j = size - i;
-		int k = i + 1;
-		while (j < size)
+	
+		for (int i = 0; i < size; i++)
 		{
-			ofst << "0 ";
-			j++;
+			int j = size - i;
+			int k = i + 1;
+			while (j < size)
+			{
+				ofst << "0 ";
+				j++;
+			}
+
+			ofst << mass[i];
+
+			while (k < size)
+			{
+				ofst << " 0";
+				k++;
+			}
+			if(HowToOut == 1)
+				ofst << endl;
 		}
+	
+	
 
-		ofst << mass[i];
 
-		while (k < size)
-		{
-			ofst << " 0";
-			k++;
-		}
-
-		ofst << endl;
-	}
 	ofst << endl;
 }
 
@@ -144,14 +149,16 @@ int * matrix::InData(ifstream &ifst)
 
 void matrix::Out(ofstream &ofst, type *current)
 {
-	ofst << "It's casual matrix " << matrix::size << "x" << matrix::size << endl;
+	ofst << "It's Casual matrix " << matrix::size << "x" << matrix::size << endl;
 	for (int i = 0; i < matrix::size; i++)
 	{
 		for (int j = 0; j < matrix::size; j++)
 		{
 			ofst << matrix::mass[i*matrix::size + j] << " ";
 		}
-		ofst << endl;
+		
+		if(HowToOut == 1)
+			ofst << endl;
 	}
 	ofst << endl;
 }
