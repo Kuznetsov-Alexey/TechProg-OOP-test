@@ -58,7 +58,6 @@ public:
 class triagonal : public type {
 	int size;
 	int *mass;
-	int RealSize;
 
 public:
 	// переопределяем интерфейс класса

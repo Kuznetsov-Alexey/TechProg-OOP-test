@@ -166,7 +166,7 @@ void matrix::Out(ofstream &ofst, type *current)
 int * triagonal::InData(ifstream &ifst)
 {
 	ifst >> size;
-	RealSize = size * size - size;
+	int RealSize = size * size - size;
 	RealSize = RealSize / 2;
 	RealSize = RealSize + size;
 
