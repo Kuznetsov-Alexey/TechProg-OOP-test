@@ -29,6 +29,7 @@ public:
 	void In(ifstream &ifst);	//ввод матриц
 	void Out(ofstream &ofst);	//вывод матриц
 	void Clear();				//очистка контейнера
+	void FiltredOut(ofstream &ofst);
 	container();				//инициализация контейнера
 };
 

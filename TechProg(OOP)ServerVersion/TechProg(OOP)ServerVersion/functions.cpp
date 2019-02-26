@@ -13,6 +13,7 @@ void container::Out(ofstream &ofst)
 {
 	ofst << "Container contents " << len
 		<< " elements." << endl;
+
 	for (int i = 0; i < len; i++) {
 		ofst << i + 1 << ": ";
 		if (len > 0)
@@ -58,7 +59,6 @@ container::container()
 
 type* type::In(ifstream &ifst, type *current)
 {
-
 	type *temporary, *point;	//Временные указатели
 	int k;
 	//int size;
@@ -86,8 +86,6 @@ type* type::In(ifstream &ifst, type *current)
 		current->mass = temporary->mass;
 	}
 	return temporary;
-
-
 }
 
 
@@ -154,4 +152,34 @@ void matrix::Out(ofstream &ofst, type *current)
 		ofst << endl;
 	}
 	ofst << endl;
+}
+
+void container::FiltredOut(ofstream &ofst)
+{
+	int DiagonalCount = 0;
+	for(int i = 0; i < len; i++)
+	{
+		diagonal* Temporary = dynamic_cast<diagonal*>(current);
+		if (Temporary)
+			DiagonalCount++;
+		current = current->next;	
+	}
+	ofst << "Container contents " << DiagonalCount
+		<< " Diagonal elements." << endl;
+
+	DiagonalCount = 1;
+
+	for (int i = 0; i < len; i++) {
+		ofst << DiagonalCount << ": ";
+		if (len > 0)
+		{
+			diagonal* Temporary = dynamic_cast<diagonal*>(current);
+			if (Temporary)
+			{
+				current->Out(ofst, current);
+				DiagonalCount++;
+			}
+			current = current->next;
+		}
+	}
 }
