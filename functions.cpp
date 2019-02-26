@@ -59,7 +59,7 @@ container::container()
 type* type::In(ifstream &ifst, type *current)
 {
 
-	type *temporary, *point;	//Временные указатели
+	type *temporary, *point;	//Г‚Г°ГҐГ¬ГҐГ­Г­Г»ГҐ ГіГЄГ Г§Г ГІГҐГ«ГЁ
 	int k;
 	//int size;
 	ifst >> k;
@@ -75,14 +75,14 @@ type* type::In(ifstream &ifst, type *current)
 	if (current == NULL)
 	{
 		temporary->mass = temporary->InData(ifst);
-		temporary->next = temporary; // указатель на сам корневой узел
+		temporary->next = temporary; // ГіГЄГ Г§Г ГІГҐГ«Гј Г­Г  Г±Г Г¬ ГЄГ®Г°Г­ГҐГўГ®Г© ГіГ§ГҐГ«
 	}
 	else
 	{
 		temporary->mass = temporary->InData(ifst);
-		point = current->next; // сохранение указателя на следующий элемент
-		current->next = temporary; // предыдущий узел указывает на создаваемый
-		temporary->next = point; // созданный узел указывает на следующий элемент
+		point = current->next; // Г±Г®ГµГ°Г Г­ГҐГ­ГЁГҐ ГіГЄГ Г§Г ГІГҐГ«Гї Г­Г  Г±Г«ГҐГ¤ГіГѕГ№ГЁГ© ГЅГ«ГҐГ¬ГҐГ­ГІ
+		current->next = temporary; // ГЇГ°ГҐГ¤Г»Г¤ГіГ№ГЁГ© ГіГ§ГҐГ« ГіГЄГ Г§Г»ГўГ ГҐГІ Г­Г  Г±Г®Г§Г¤Г ГўГ ГҐГ¬Г»Г©
+		temporary->next = point; // Г±Г®Г§Г¤Г Г­Г­Г»Г© ГіГ§ГҐГ« ГіГЄГ Г§Г»ГўГ ГҐГІ Г­Г  Г±Г«ГҐГ¤ГіГѕГ№ГЁГ© ГЅГ«ГҐГ¬ГҐГ­ГІ
 		current->mass = temporary->mass;
 	}
 	return temporary;
@@ -94,7 +94,7 @@ type* type::In(ifstream &ifst, type *current)
 int * diagonal::InData(ifstream &ifst)
 {
 	ifst >> size;
-	mass = new int[size]; // массив значений эл-ов главной диагонали
+	mass = new int[size]; // Г¬Г Г±Г±ГЁГў Г§Г­Г Г·ГҐГ­ГЁГ© ГЅГ«-Г®Гў ГЈГ«Г ГўГ­Г®Г© Г¤ГЁГ ГЈГ®Г­Г Г«ГЁ
 	for (int i = 0; i < size; i++)
 	{
 		ifst >> mass[i];
@@ -106,11 +106,6 @@ void diagonal::Out(ofstream &ofst, type *current)
 {
 	ofst << "It's simple matrix " << size << "x" << size << endl;
 
-	/*for (int i = 0; i < size; i++)
-	{
-	ofst << mass[i] << " ";
-	}
-	*/
 	for (int i = 0; i < size; i++)
 	{
 		int j = size - i;
@@ -138,7 +133,7 @@ void diagonal::Out(ofstream &ofst, type *current)
 int * matrix::InData(ifstream &ifst)
 {
 	ifst >> size;
-	matrix::mass = new int[size*size]; // массив значений 
+	matrix::mass = new int[size*size]; // Г¬Г Г±Г±ГЁГў Г§Г­Г Г·ГҐГ­ГЁГ© 
 
 	for (int i = 0; i < size*size; i++)
 	{
