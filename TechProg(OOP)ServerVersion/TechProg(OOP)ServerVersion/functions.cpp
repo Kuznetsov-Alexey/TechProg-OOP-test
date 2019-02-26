@@ -1,12 +1,19 @@
 #include "header.h"
 
-void container::In(ifstream &ifst)
+bool container::In(ifstream &ifst)
 {
-	while (!ifst.eof()) {
+	bool ErrorFlag = false;
+	while ((!ifst.eof())&&(!ErrorFlag)) {
 		if ((container::current = type::In(ifst, current)) != 0) {
 			len++;
 		}
+		else
+		{
+			cout << "Incorrect Type in File";
+			ErrorFlag = true;
+		}
 	}
+	return(ErrorFlag);
 }
 
 void container::Out(ofstream &ofst)
@@ -61,13 +68,15 @@ type* type::In(ifstream &ifst, type *current)
 
 	type *temporary, *point;	//Временные указатели
 	int k;
-	//int size;
 	ifst >> k;
 	switch (k) {
 	case 1:
 		temporary = new diagonal; break;
 	case 2:
 		temporary = new matrix; break;
+	case 3:
+		temporary = new triagonal; break;
+
 	default:
 		return 0;
 	}
@@ -86,8 +95,6 @@ type* type::In(ifstream &ifst, type *current)
 		current->mass = temporary->mass;
 	}
 	return temporary;
-
-
 }
 
 
@@ -133,7 +140,7 @@ void diagonal::Out(ofstream &ofst, type *current)
 int * matrix::InData(ifstream &ifst)
 {
 	ifst >> size;
-	matrix::mass = new int[size*size]; // массив значений 
+	mass = new int[size*size]; // массив значений 
 
 	for (int i = 0; i < size*size; i++)
 	{
@@ -144,13 +151,58 @@ int * matrix::InData(ifstream &ifst)
 
 void matrix::Out(ofstream &ofst, type *current)
 {
-	ofst << "It's casual matrix " << matrix::size << "x" << matrix::size << endl;
-	for (int i = 0; i < matrix::size; i++)
+	ofst << "It's casual matrix " << size << "x" << size << endl;
+	for (int i = 0; i < size; i++)
 	{
-		for (int j = 0; j < matrix::size; j++)
+		for (int j = 0; j < size; j++)
 		{
-			ofst << matrix::mass[i*matrix::size + j] << " ";
+			ofst << matrix::mass[i*size + j] << " ";
 		}
+		ofst << endl;
+	}
+	ofst << endl;
+}
+
+int * triagonal::InData(ifstream &ifst)
+{
+	ifst >> size;
+	RealSize = size * size - size;
+	RealSize = RealSize / 2;
+	RealSize = RealSize + size;
+
+	mass = new int[RealSize];
+
+	for (int i = 0; i < RealSize; i++)
+	{
+		ifst >> mass[i];
+	}
+	return(mass);
+}
+
+void triagonal::Out(ofstream &ofst, type *current)
+{
+	ofst << "It's Triagonal matrix " << size << "x" << size << endl;
+
+	int RealMass = 0;
+
+	for (int i = 0; i < size; i++)
+	{
+		int j = size - i - 1;
+		int k = i + 1;				
+
+		while (j < size)
+		{
+			ofst << mass[RealMass] << " ";
+			RealMass++;
+			j++;
+		}
+		
+		while (k < size)
+		{
+			ofst << "0 ";
+			k++;
+		}
+
 		ofst << endl;
 	}
 	ofst << endl;

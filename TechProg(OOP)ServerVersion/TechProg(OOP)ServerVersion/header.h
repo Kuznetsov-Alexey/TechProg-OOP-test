@@ -26,7 +26,7 @@ public:
 
 	type *current;	//указатель на текущий элемент
 
-	void In(ifstream &ifst);	//ввод матриц
+	bool In(ifstream &ifst);	//ввод матриц
 	void Out(ofstream &ofst);	//вывод матриц
 	void Clear();				//очистка контейнера
 	container();				//инициализация контейнера
@@ -53,4 +53,16 @@ public:
 	int * InData(ifstream &ifst); // ввод
 	void Out(ofstream &ofst, type *current); // вывод
 	matrix() {} // создание без инициализации.
+};
+
+class triagonal : public type {
+	int size;
+	int *mass;
+	int RealSize;
+
+public:
+	// переопределяем интерфейс класса
+	int * InData(ifstream &ifst); // ввод
+	void Out(ofstream &ofst, type *current); // вывод
+	triagonal() {} // создание без инициализации.
 };
