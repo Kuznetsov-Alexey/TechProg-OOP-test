@@ -104,7 +104,7 @@ int * diagonal::InData(ifstream &ifst)
 
 void diagonal::Out(ofstream &ofst, type *current)
 {
-	ofst << "It's simple matrix " << size << "x" << size << endl;
+	ofst << "It's Diagonal matrix " << size << "x" << size << endl;
 
 	for (int i = 0; i < size; i++)
 	{
@@ -133,7 +133,7 @@ void diagonal::Out(ofstream &ofst, type *current)
 int * matrix::InData(ifstream &ifst)
 {
 	ifst >> size;
-	matrix::mass = new int[size*size]; // массив значений 
+	mass = new int[size*size]; // массив значений 
 
 	for (int i = 0; i < size*size; i++)
 	{
@@ -144,12 +144,12 @@ int * matrix::InData(ifstream &ifst)
 
 void matrix::Out(ofstream &ofst, type *current)
 {
-	ofst << "It's casual matrix " << matrix::size << "x" << matrix::size << endl;
-	for (int i = 0; i < matrix::size; i++)
+	ofst << "It's casual matrix " << size << "x" << size << endl;
+	for (int i = 0; i < size; i++)
 	{
-		for (int j = 0; j < matrix::size; j++)
+		for (int j = 0; j < size; j++)
 		{
-			ofst << matrix::mass[i*matrix::size + j] << " ";
+			ofst << mass[i*size + j] << " ";
 		}
 		ofst << endl;
 	}
