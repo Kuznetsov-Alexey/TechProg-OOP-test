@@ -12,6 +12,7 @@ public:
 	static type* In(ifstream &ifst, type *current);				//Для ввода последующих эл-ов
 	virtual int * InData(ifstream &ifst) = 0;					// ввод с учетом типа объекта
 	virtual void Out(ofstream &ofst, type *current) = 0;		// вывод с учетом типа объекта
+	virtual void OutDiagonal(ofstream &ofst, type *current);
 
 	int *mass;
 	type *next;
@@ -30,6 +31,7 @@ public:
 	void Out(ofstream &ofst);	//вывод матриц
 	void Clear();				//очистка контейнера
 	void FiltredOut(ofstream &ofst);
+	void OutputDiagonal(ofstream &ofst);
 	container();				//инициализация контейнера
 };
 
@@ -41,6 +43,7 @@ public:
 	// переопределяем интерфейс класса
 	int * InData(ifstream &ifst); // ввод
 	void Out(ofstream &ofst, type *current); // вывод
+	void OutDiagonal(ofstream &ofst, type *current);
 
 	diagonal() {} // создание без инициализации.
 };
