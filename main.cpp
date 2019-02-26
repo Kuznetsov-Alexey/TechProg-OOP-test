@@ -9,7 +9,6 @@ int main(int argc, char* argv[])
 	"Waited: command in_file out_file"
 	<< endl;
 	exit(1);
-	it's new class
 	}
 
 	ifstream ifst(argv[1]);
