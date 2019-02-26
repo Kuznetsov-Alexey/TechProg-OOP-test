@@ -105,8 +105,7 @@ int * diagonal::InData(ifstream &ifst)
 void diagonal::Out(ofstream &ofst, type *current)
 {
 	ofst << "It's Diagonal matrix " << size << "x" << size << endl;
-
-	
+		
 		for (int i = 0; i < size; i++)
 		{
 			int j = size - i;
@@ -124,12 +123,15 @@ void diagonal::Out(ofstream &ofst, type *current)
 				ofst << " 0";
 				k++;
 			}
-			if(HowToOut == 1)
+			if (HowToOut == 1)
 				ofst << endl;
+			else
+				ofst << " ";
 		}
 	
 	
-
+	if(HowToOut !=1)
+		ofst << endl;
 
 	ofst << endl;
 }
@@ -159,6 +161,11 @@ void matrix::Out(ofstream &ofst, type *current)
 		
 		if(HowToOut == 1)
 			ofst << endl;
+		else
+			ofst << " ";
 	}
+
+	if (HowToOut != 1)
+		ofst << endl;
 	ofst << endl;
 }
