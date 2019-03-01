@@ -13,6 +13,7 @@ public:
 	virtual int * InData(ifstream &ifst) = 0;					// ввод с учетом типа объекта
 	virtual void Out(ofstream &ofst, type *current) = 0;		// вывод с учетом типа объекта
 	virtual int SumOfElements(type *current) = 0;
+	bool Compare(type *current);
 
 	int *mass;
 	type *next;
@@ -30,6 +31,7 @@ public:
 	void In(ifstream &ifst);	//ввод матриц
 	void Out(ofstream &ofst);	//вывод матриц
 	void Clear();				//очистка контейнера
+	void Sorting();
 	container();				//инициализация контейнера
 };
 
