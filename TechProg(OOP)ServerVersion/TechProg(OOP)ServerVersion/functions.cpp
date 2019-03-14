@@ -89,6 +89,7 @@ bool type::Compare(type *current)
 	int SecondSum = current->next->SumOfElements(current->next);
 	return(FirstSum > SecondSum);
 }
+
 type* type::In(ifstream &ifst, type *current)
 {
 	type *temporary, *point;	//Временные указатели
