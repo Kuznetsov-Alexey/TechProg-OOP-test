@@ -86,8 +86,6 @@ type* type::In(ifstream &ifst, type *current)
 		current->mass = temporary->mass;
 	}
 	return temporary;
-
-
 }
 
 
