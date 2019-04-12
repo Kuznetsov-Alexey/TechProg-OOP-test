@@ -27,6 +27,7 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 	ofst << "Filled container. " << endl;
+	c.Sorting();
 	c.Out(ofst);
 	c.FiltredOut(ofst);
 	c.OutputDiagonal(ofst);

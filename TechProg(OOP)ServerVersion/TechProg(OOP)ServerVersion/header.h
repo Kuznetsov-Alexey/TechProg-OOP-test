@@ -14,6 +14,7 @@ public:
 	virtual void Out(ofstream &ofst, type *current) = 0;		// вывод с учетом типа объекта
 	virtual void OutDiagonal(ofstream &ofst, type *current);
 	virtual int SumOfElements(type *current) = 0;
+	bool Compare(type *current);
 
 	int *mass;
 	type *next;
@@ -32,6 +33,7 @@ public:
 	bool In(ifstream &ifst);	//ввод матриц
 	void Out(ofstream &ofst);	//вывод матриц
 	void Clear();				//очистка контейнера
+	void Sorting();
 	void FiltredOut(ofstream &ofst);
 	void OutputDiagonal(ofstream &ofst);
 	container();				//инициализация контейнера
