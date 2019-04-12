@@ -1,12 +1,19 @@
 #include "header.h"
 
-void container::In(ifstream &ifst)
+bool container::In(ifstream &ifst)
 {
-	while (!ifst.eof()) {
+	bool ErrorFlag = false;
+	while ((!ifst.eof())&&(!ErrorFlag)) {
 		if ((container::current = type::In(ifst, current)) != 0) {
 			len++;
 		}
+		else
+		{
+			cout << "Incorrect Type in File";
+			ErrorFlag = true;
+		}
 	}
+	return(ErrorFlag);
 }
 
 void container::Out(ofstream &ofst)
@@ -61,13 +68,15 @@ type* type::In(ifstream &ifst, type *current)
 
 	type *temporary, *point;	//Временные указатели
 	int k;
-	//int size;
 	ifst >> k;
 	switch (k) {
 	case 1:
 		temporary = new diagonal; break;
 	case 2:
 		temporary = new matrix; break;
+	case 3:
+		temporary = new triagonal; break;
+
 	default:
 		return 0;
 	}
@@ -147,8 +156,53 @@ void matrix::Out(ofstream &ofst, type *current)
 	{
 		for (int j = 0; j < size; j++)
 		{
-			ofst << mass[i*size + j] << " ";
+			ofst << matrix::mass[i*size + j] << " ";
 		}
+		ofst << endl;
+	}
+	ofst << endl;
+}
+
+int * triagonal::InData(ifstream &ifst)
+{
+	ifst >> size;
+	int RealSize = size * size - size;
+	RealSize = RealSize / 2;
+	RealSize = RealSize + size;
+
+	mass = new int[RealSize];
+
+	for (int i = 0; i < RealSize; i++)
+	{
+		ifst >> mass[i];
+	}
+	return(mass);
+}
+
+void triagonal::Out(ofstream &ofst, type *current)
+{
+	ofst << "It's Triagonal matrix " << size << "x" << size << endl;
+
+	int RealMass = 0;
+
+	for (int i = 0; i < size; i++)
+	{
+		int j = size - i - 1;
+		int k = i + 1;				
+
+		while (j < size)
+		{
+			ofst << mass[RealMass] << " ";
+			RealMass++;
+			j++;
+		}
+		
+		while (k < size)
+		{
+			ofst << "0 ";
+			k++;
+		}
+
 		ofst << endl;
 	}
 	ofst << endl;
