@@ -80,7 +80,7 @@ type* type::In(ifstream &ifst, type *current)
 	default:
 		return 0;
 	}
-	ifst >> temporary->HowToOut;
+
 	if (current == NULL)
 	{
 		temporary->mass = temporary->InData(ifst);
@@ -95,6 +95,8 @@ type* type::In(ifstream &ifst, type *current)
 		current->mass = temporary->mass;
 	}
 	return temporary;
+
+
 }
 
 
@@ -123,22 +125,16 @@ void diagonal::Out(ofstream &ofst, type *current)
 			j++;
 		}
 
-			ofst << mass[i];
+		ofst << mass[i];
 
-			while (k < size)
-			{
-				ofst << " 0";
-				k++;
-			}
-			if (HowToOut == 1)
-				ofst << endl;
-			else
-				ofst << " ";
-		}	
-	
-	if(HowToOut !=1)
+		while (k < size)
+		{
+			ofst << " 0";
+			k++;
+		}
+
 		ofst << endl;
-
+	}
 	ofst << endl;
 }
 
@@ -157,8 +153,6 @@ int * matrix::InData(ifstream &ifst)
 
 void matrix::Out(ofstream &ofst, type *current)
 {
-	ofst << "It's Casual matrix " << size << "x" << size << endl;
-	for (int i = 0; i < size; i++)
 	ofst << "It's casual matrix " << size << "x" << size << endl;
 	for (int i = 0; i < size; i++)
 	{
@@ -210,16 +204,8 @@ void triagonal::Out(ofstream &ofst, type *current)
 			ofst << "0 ";
 			k++;
 		}
-		
-		if(HowToOut == 1)
-			ofst << endl;
-		else
-			ofst << " ";
 
 		ofst << endl;
 	}
-
-	if (HowToOut != 1)
-		ofst << endl;
 	ofst << endl;
 }
