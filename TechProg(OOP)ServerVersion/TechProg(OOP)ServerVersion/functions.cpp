@@ -64,6 +64,7 @@ container::container()
 	len = 0;
 }
 
+
 type* type::In(ifstream &ifst, type *current)
 {
 	type *temporary, *point;	//Временные указатели
@@ -142,6 +143,15 @@ void diagonal::Out(ofstream &ofst, type *current)
 		ofst << endl;
 
 	ofst << endl;
+}
+
+int diagonal::SumOfElements(type *current)
+{
+	int sum = 0;
+	for (int i = 0; i < size; i++)
+			sum = sum + mass[i];
+
+	return sum;
 }
 
 

@@ -13,6 +13,7 @@ public:
 	virtual int * InData(ifstream &ifst) = 0;					// ввод с учетом типа объекта
 	virtual void Out(ofstream &ofst, type *current) = 0;		// вывод с учетом типа объекта
 	virtual void OutDiagonal(ofstream &ofst, type *current);
+	virtual int SumOfElements(type *current) = 0;
 
 	int *mass;
 	type *next;
@@ -46,6 +47,7 @@ public:
 	// переопределяем интерфейс класса
 	int * InData(ifstream &ifst); // ввод
 	void Out(ofstream &ofst, type *current); // вывод
+	int SumOfElements(type *current);
 	void OutDiagonal(ofstream &ofst, type *current);
 
 	diagonal() {} // создание без инициализации.
@@ -61,6 +63,8 @@ public:
 	// переопределяем интерфейс класса
 	int * InData(ifstream &ifst); // ввод
 	void Out(ofstream &ofst, type *current); // вывод
+	int SumOfElements(type *current);
+
 	matrix() {} // создание без инициализации.
 };
 
