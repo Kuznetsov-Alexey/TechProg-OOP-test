@@ -158,10 +158,17 @@ void matrix::Out(ofstream &ofst, type *current)
 	{
 		for (int j = 0; j < size; j++)
 		{
-			ofst << matrix::mass[i*size + j] << " ";
+			ofst << mass[i*size + j] << " ";
 		}
-		ofst << endl;
+
+		if (HowToOut == 1)
+			ofst << endl;
+		else
+			ofst << " ";
 	}
+
+	if (HowToOut != 1)
+		ofst << endl;
 	ofst << endl;
 }
 
