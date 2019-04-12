@@ -76,5 +76,6 @@ public:
 	// переопределяем интерфейс класса
 	int * InData(ifstream &ifst); // ввод
 	void Out(ofstream &ofst, type *current); // вывод
+	int SumOfElements(type *current);
 	triagonal() {} // создание без инициализации.
 };
