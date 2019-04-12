@@ -81,6 +81,8 @@ type* type::In(ifstream &ifst, type *current)
 		return 0;
 	}
 
+	ifst >> temporary->HowToOut;
+
 	if (current == NULL)
 	{
 		temporary->mass = temporary->InData(ifst);
@@ -95,8 +97,6 @@ type* type::In(ifstream &ifst, type *current)
 		current->mass = temporary->mass;
 	}
 	return temporary;
-
-
 }
 
 
@@ -218,7 +218,12 @@ void triagonal::Out(ofstream &ofst, type *current)
 			k++;
 		}
 
-		ofst << endl;
+		if (HowToOut == 1)
+			ofst << endl;
 	}
+
+	if (HowToOut != 1)
+		ofst << endl;
+
 	ofst << endl;
 }
