@@ -58,11 +58,55 @@ void container::Clear()
 
 }
 
+void container::FiltredOut(ofstream &ofst)
+{
+	int DiagonalCount = 0;
+	for (int i = 0; i < len; i++)
+	{
+		diagonal* Temporary = dynamic_cast<diagonal*>(current);
+		if (Temporary)
+			DiagonalCount++;
+		current = current->next;
+	}
+	ofst << "Container contents " << DiagonalCount
+		<< " Diagonal elements." << endl;
+
+	DiagonalCount = 1;
+
+	for (int i = 0; i < len; i++) {
+
+		if (len > 0)
+		{
+			diagonal* Temporary = dynamic_cast<diagonal*>(current);
+			if (Temporary)
+			{
+				ofst << DiagonalCount << ": ";
+				current->Out(ofst, current);
+				DiagonalCount++;
+			}
+			current = current->next;
+		}
+	}
+}
+
+void container::OutputDiagonal(ofstream &ofst)
+{
+	ofst << "Only Diagonal matrix." << endl;
+	for (int i = 0; i < len; i++)
+	{
+		ofst << i << ": ";
+		current->OutDiagonal(ofst, current);
+		current = current->next;
+	}
+}
+
 container::container()
 {
 	current = NULL;
 	len = 0;
 }
+
+
 
 
 type* type::In(ifstream &ifst, type *current)
@@ -99,6 +143,12 @@ type* type::In(ifstream &ifst, type *current)
 	}
 	return temporary;
 }
+
+void type::OutDiagonal(ofstream &ofst, type *current)
+{
+	ofst << endl;
+}
+
 
 
 int * diagonal::InData(ifstream &ifst)
@@ -154,6 +204,11 @@ int diagonal::SumOfElements(type *current)
 	return sum;
 }
 
+void diagonal::OutDiagonal(ofstream &ofst, type *current)
+{
+	Out(ofst, current);
+}
+
 
 int * matrix::InData(ifstream &ifst)
 {
@@ -187,6 +242,16 @@ void matrix::Out(ofstream &ofst, type *current)
 		ofst << endl;
 	ofst << endl;
 }
+
+int matrix::SumOfElements(type *current)
+{
+	int sum = 0;
+	for (int i = 0; i < size*size; i++)
+		sum = sum + mass[i];
+
+	return sum;
+}
+
 
 int * triagonal::InData(ifstream &ifst)
 {
@@ -238,55 +303,19 @@ void triagonal::Out(ofstream &ofst, type *current)
 	ofst << endl;
 }
 
-
-void container::FiltredOut(ofstream &ofst)
+int triagonal::SumOfElements(type *current)
 {
-	int DiagonalCount = 0;
-	for(int i = 0; i < len; i++)
-	{
-		diagonal* Temporary = dynamic_cast<diagonal*>(current);
-		if (Temporary)
-			DiagonalCount++;
-		current = current->next;	
-	}
-	ofst << "Container contents " << DiagonalCount
-		<< " Diagonal elements." << endl;
+	int sum = 0;
+	int RealSize = size * size - size;
+	RealSize = RealSize / 2;
+	RealSize = RealSize + size;
 
-	DiagonalCount = 1;
+	for (int i = 0; i < RealSize; i++)
+		sum = sum + mass[i];
 
-	for (int i = 0; i < len; i++) {
-		
-		if (len > 0)
-		{
-			diagonal* Temporary = dynamic_cast<diagonal*>(current);
-			if (Temporary)
-			{
-				ofst << DiagonalCount << ": ";
-				current->Out(ofst, current);
-				DiagonalCount++;
-			}
-			current = current->next;
-		}
-	}
+	return sum;
 }
 
-void container::OutputDiagonal(ofstream &ofst)
-{
-	ofst << "Only Diagonal matrix." << endl;
-	for (int i = 0; i < len; i++)
-	{
-		ofst << i << ": ";
-		current->OutDiagonal(ofst, current);
-		current = current->next;
-	}
-}
 
-void type::OutDiagonal(ofstream &ofst, type *current)
-{
-	ofst << endl;
-}
 
-void diagonal::OutDiagonal(ofstream &ofst, type *current)
-{
-	Out(ofst, current);
-}
+
