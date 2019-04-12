@@ -132,9 +132,15 @@ void diagonal::Out(ofstream &ofst, type *current)
 			ofst << " 0";
 			k++;
 		}
-
-		ofst << endl;
+		if (HowToOut == 1)
+			ofst << endl;
+		else
+			ofst << " ";
 	}
+
+	if (HowToOut != 1)
+		ofst << endl;
+
 	ofst << endl;
 }
 
@@ -153,7 +159,7 @@ int * matrix::InData(ifstream &ifst)
 
 void matrix::Out(ofstream &ofst, type *current)
 {
-	ofst << "It's casual matrix " << size << "x" << size << endl;
+	ofst << "It's Casual matrix " << size << "x" << size << endl;
 	for (int i = 0; i < size; i++)
 	{
 		for (int j = 0; j < size; j++)
