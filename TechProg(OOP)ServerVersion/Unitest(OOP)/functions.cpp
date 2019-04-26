@@ -1,10 +1,11 @@
+#include "stdafx.h"
 #include "header.h"
 
 bool container::In(ifstream &ifst)
 {
 	bool ErrorFlag = false;
 	while ((!ifst.eof())&&(!ErrorFlag)) {
-		if ((container::current = type::In(ifst, current)) != 0) {
+		if ((current = current->In(ifst, current)) != 0) {
 			len++;
 		}
 		else
@@ -127,10 +128,10 @@ void container::Sorting()
 				previously1->next = next1;
 				current = next1;
 			}
-			current = current->next;
 		}
 		current = current->next;
-	}	
+	}
+	current = current->next;
 }
 
 
@@ -176,8 +177,8 @@ void type::OutDiagonal(ofstream &ofst)
 
 bool type::Compare(type *current)
 {
-	int FirstSum = SumOfElements();
-	int SecondSum = next->SumOfElements();
+	int FirstSum = SumOfElements(current);
+	int SecondSum = SumOfElements(current->next);
 	return(FirstSum > SecondSum);
 }
 
@@ -225,7 +226,7 @@ void diagonal::Out(ofstream &ofst)
 	ofst << endl;
 }
 
-int diagonal::SumOfElements()
+int diagonal::SumOfElements(type *current)
 {
 	int sum = 0;
 	for (int i = 0; i < size; i++)
@@ -234,9 +235,15 @@ int diagonal::SumOfElements()
 	return sum;
 }
 
-void diagonal::OutDiagonal(ofstream &ofst)
+void diagonal::OutDiagonal(ofstream &ofst, type *current)
 {
 	Out(ofst);
+}
+
+void diagonal::SetMass(int* expected)
+{
+	for (int i = 0; i < size; i++)
+		expected[i] = mass[i];
 }
 
 
@@ -272,13 +279,19 @@ void matrix::Out(ofstream &ofst)
 	ofst << endl;
 }
 
-int matrix::SumOfElements()
+int matrix::SumOfElements(type *current)
 {
 	int sum = 0;
 	for (int i = 0; i < size*size; i++)
 		sum = sum + mass[i];
 
 	return sum;
+}
+
+void matrix::SetMass(int* expected)
+{
+	for (int i = 0; i < size * size; i++)
+		expected[i] = mass[i];
 }
 
 
@@ -331,7 +344,7 @@ void triagonal::Out(ofstream &ofst)
 	ofst << endl;
 }
 
-int triagonal::SumOfElements()
+int triagonal::SumOfElements(type *current)
 {
 	int sum = 0;
 	int RealSize = size * size - size;
@@ -344,6 +357,20 @@ int triagonal::SumOfElements()
 	return sum;
 }
 
+void triagonal::SetMass(int* expected)
+{
+	int RealSize = size * size - size;
+	RealSize = RealSize / 2;
+	RealSize = RealSize + size;
+
+	for (int i = 0; i < RealSize; i++)
+		expected[i] = mass[i];
+}
+
+void container::lenplus()
+{
+	len++;
+}
 
 
 
