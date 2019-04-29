@@ -22,7 +22,6 @@ namespace UnitestOOP
 
 			Assert::AreEqual(15, sum);
 		}
-
 		TEST_METHOD(Sum_Matrix)
 		{
 			ifstream fin("D:\\repositories\\techprog(oop)serverversion\\techprog(oop)serverversion\\unitest(oop)\\Text_Files\\inMatrix.txt");
@@ -33,7 +32,6 @@ namespace UnitestOOP
 
 			Assert::AreEqual(10, sum);		
 		}
-
 		TEST_METHOD(Sum_Triagonal)
 		{
 			ifstream fin("D:\\repositories\\techprog(oop)serverversion\\techprog(oop)serverversion\\unitest(oop)\\Text_Files\\inTriagonal.txt");
@@ -44,7 +42,6 @@ namespace UnitestOOP
 
 			Assert::AreEqual(6, sum);
 		}
-
 
 		TEST_METHOD(Input_Diagonal)
 		{
@@ -60,7 +57,6 @@ namespace UnitestOOP
 			Assert::AreEqual(actual[1], expected[1]);
 			Assert::AreEqual(actual[2], expected[2]);
 		}
-
 		TEST_METHOD(Input_Matrix)
 		{
 			ifstream fin("D:\\repositories\\techprog(oop)serverversion\\techprog(oop)serverversion\\unitest(oop)\\Text_Files\\inMatrix.txt");
@@ -78,7 +74,6 @@ namespace UnitestOOP
 			Assert::AreEqual(actual[3], expected[3]);
 
 		}
-
 		TEST_METHOD(Input_Triagonal)
 		{
 			ifstream fin("D:\\repositories\\techprog(oop)serverversion\\techprog(oop)serverversion\\unitest(oop)\\Text_Files\\inTriagonal.txt");
@@ -93,7 +88,6 @@ namespace UnitestOOP
 			Assert::AreEqual(actual[1], expected[1]);
 			Assert::AreEqual(actual[2], expected[2]);
 		}
-
 		TEST_METHOD(Input_Type)
 		{
 			ifstream fin("D:\\repositories\\techprog(oop)serverversion\\techprog(oop)serverversion\\unitest(oop)\\Text_Files\\input_Type.txt");
@@ -116,8 +110,6 @@ namespace UnitestOOP
 			Assert::AreEqual(actual, expected);
 		}
 
-
-
 		TEST_METHOD(Input_Output_container)
 		{
 			ifstream fin("D:\\repositories\\techprog(oop)serverversion\\techprog(oop)serverversion\\unitest(oop)\\Text_Files\\input.txt");
@@ -137,7 +129,6 @@ namespace UnitestOOP
 
 			Assert::AreEqual(actual, expected);
 		}
-
 		TEST_METHOD(Output_Type)
 		{
 			ifstream fin("D:\\repositories\\techprog(oop)serverversion\\techprog(oop)serverversion\\unitest(oop)\\Text_Files\\input_Type.txt");
@@ -159,12 +150,10 @@ namespace UnitestOOP
 			Assert::AreEqual(actual, expected);
 			
 		}
-
 		TEST_METHOD(Output_Diagonal)
 		{
 			ifstream fin("D:\\repositories\\techprog(oop)serverversion\\techprog(oop)serverversion\\unitest(oop)\\Text_Files\\inDiagonal.txt");
 			ofstream ofst("D:\\repositories\\techprog(oop)serverversion\\techprog(oop)serverversion\\unitest(oop)\\Text_Files\\outDiagonal(Test).txt");
-
 
 			type * test = new diagonal;
 			test->InData(fin);
@@ -180,7 +169,6 @@ namespace UnitestOOP
 
 			Assert::AreEqual(actual, expected);
 		}
-
 		TEST_METHOD(Output_Matrix)
 		{
 			ifstream fin("D:\\repositories\\techprog(oop)serverversion\\techprog(oop)serverversion\\unitest(oop)\\Text_Files\\inMatrix.txt");
@@ -201,7 +189,6 @@ namespace UnitestOOP
 
 			Assert::AreEqual(actual, expected);
 		}
-
 		TEST_METHOD(Output_Triagonal)
 		{
 			ifstream fin("D:\\repositories\\techprog(oop)serverversion\\techprog(oop)serverversion\\unitest(oop)\\Text_Files\\inTriagonal.txt");
@@ -223,7 +210,6 @@ namespace UnitestOOP
 			Assert::AreEqual(actual, expected);
 		}
 
-
 		TEST_METHOD(Filtred_Out)
 		{
 			ifstream fin("D:\\repositories\\techprog(oop)serverversion\\techprog(oop)serverversion\\unitest(oop)\\Text_Files\\input.txt");
@@ -243,7 +229,6 @@ namespace UnitestOOP
 
 			Assert::AreEqual(actual, expected);
 		}
-
 		TEST_METHOD(Sorting)
 		{
 			ifstream fin("D:\\repositories\\techprog(oop)serverversion\\techprog(oop)serverversion\\unitest(oop)\\Text_Files\\input.txt");

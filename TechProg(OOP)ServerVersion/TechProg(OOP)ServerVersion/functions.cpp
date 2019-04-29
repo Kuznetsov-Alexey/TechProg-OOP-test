@@ -1,19 +1,22 @@
 #include "header.h"
 
-bool container::In(ifstream &ifst)
+void container::In(ifstream &ifst)
 {
 	bool ErrorFlag = false;
-	while ((!ifst.eof())&&(!ErrorFlag)) {
-		if ((container::current = type::In(ifst, current)) != 0) {
-			len++;
+	while ((!ifst.eof())&&(!ErrorFlag)) 
+	{
+
+		if (container::current == NULL)
+		{
+			if ((container::current = type::InType(ifst, current)) != 0)
+				len++;
 		}
 		else
 		{
-			cout << "Incorrect Type in File";
-			ErrorFlag = true;
+			if(type::InType(ifst, current)!= 0)
+				len++;
 		}
-	}
-	return(ErrorFlag);
+	}	
 }
 
 void container::Out(ofstream &ofst)
@@ -134,33 +137,38 @@ void container::Sorting()
 }
 
 
-type* type::In(ifstream &ifst, type *current)
+type* type::InType(ifstream &ifst, type *current)
 {
-	type *temporary, *point;	//Временные указатели
-	int k;
-	ifst >> k;
-	switch (k) {
-	case 1:
-		temporary = new diagonal; break;
-	case 2:
-		temporary = new matrix; break;
-	case 3:
-		temporary = new triagonal; break;
-
-	default:
+	int key;
+	if ((key = Is_Numeral_Element_and_Skip_Strings(4, ifst)) == 0)
 		return 0;
-	}
 
-	ifst >> temporary->HowToOut;
-
-	if (current == NULL)
+	type *temporary, *point;	//Временные указатели
+	bool success_input;
+	
+	switch (key)
 	{
-		temporary->InData(ifst);
-		temporary->next = temporary; // указатель на сам корневой узел
+		case 1:
+			temporary = new diagonal; break;
+		case 2:
+			temporary = new matrix; break;
+		case 3:
+			temporary = new triagonal; break;
+
+		default:
+			Is_Numeral_Element_and_Skip_Strings(4, ifst);
+			return 0;
 	}
+	
+	success_input = temporary->InData(ifst);
+
+	if (!success_input)
+		return 0;
+	if (current == NULL)
+		temporary->next = temporary; // указатель на сам корневой узел		
+	
 	else
 	{
-		temporary->InData(ifst);
 		point = current->next; // сохранение указателя на следующий элемент
 		current->next = temporary; // предыдущий узел указывает на создаваемый
 		temporary->next = point; // созданный узел указывает на следующий элемент
@@ -181,15 +189,65 @@ bool type::Compare(type *current)
 	return(FirstSum > SecondSum);
 }
 
-
-void diagonal::InData(ifstream &ifst)
+int type::Is_Numeral_Element_and_Skip_Strings(int repeat, ifstream &ifst)
 {
-	ifst >> size;
+	int result;
+	string line;
+	ifst >> line;
+	if (!isdigit(unsigned char(line.front())))
+	{
+		for (int i = 0; i < repeat; i++)
+			getline(ifst, line, '\n');
+		return 0;
+	}
+	result = stoul(line);
+	getline(ifst, line, '\n');
+	return result;
+}
+
+
+bool diagonal::InData(ifstream &ifst)
+{
+	string line_of_elements;
+	string element;
+	int length_element;
+
+	if ((HowToOut = Is_Numeral_Element_and_Skip_Strings(3, ifst)) == 0)
+		return 0;
+
+	if ((size = Is_Numeral_Element_and_Skip_Strings(2, ifst)) == 0)
+		return 0;
+
+	getline(ifst, line_of_elements, '\n');
+
 	mass = new int[size]; // массив значений эл-ов главной диагонали
 	for (int i = 0; i < size; i++)
 	{
-		ifst >> mass[i];
+		
+		if (line_of_elements.length() == 0)
+			return 0;
+
+		length_element = line_of_elements.find(' ');
+
+		if (length_element > 0)
+		{
+			element = line_of_elements.substr(0, length_element);
+			length_element++;
+		}
+		else
+		{
+			length_element = line_of_elements.length();
+			element = line_of_elements;
+		}
+
+		if (!isdigit(unsigned char(element.front())))
+			return 0;
+
+		mass[i] = stoul(element);
+		element = "";
+		line_of_elements.erase(0, length_element);
 	}
+	return 1;
 }
 
 void diagonal::Out(ofstream &ofst)
@@ -240,15 +298,48 @@ void diagonal::OutDiagonal(ofstream &ofst)
 }
 
 
-void matrix::InData(ifstream &ifst)
+bool matrix::InData(ifstream &ifst)
 {
-	ifst >> size;
+	string line_of_elements;
+	string element;
+	int length_element;
+
+	if ((HowToOut = Is_Numeral_Element_and_Skip_Strings(3, ifst)) == 0)
+		return 0;
+
+	if ((size = Is_Numeral_Element_and_Skip_Strings(2, ifst)) == 0)
+		return 0;
+
+	getline(ifst, line_of_elements, '\n');
+
 	mass = new int[size*size]; // массив значений 
 
 	for (int i = 0; i < size*size; i++)
 	{
-		ifst >> mass[i];
+		if (line_of_elements.length() == 0)
+			return 0;
+
+		length_element = line_of_elements.find(' ');
+
+		if (length_element > 0)
+		{
+			element = line_of_elements.substr(0, length_element);
+			length_element++;
+		}
+		else
+		{
+			length_element = line_of_elements.length();
+			element = line_of_elements;
+		}
+
+		if (!isdigit(unsigned char(element.front())))
+			return 0;
+
+		mass[i] = stoul(element);
+		element = "";
+		line_of_elements.erase(0, length_element);
 	}
+	return 1;
 }
 
 void matrix::Out(ofstream &ofst)
@@ -282,9 +373,20 @@ int matrix::SumOfElements()
 }
 
 
-void triagonal::InData(ifstream &ifst)
+bool triagonal::InData(ifstream &ifst)
 {
-	ifst >> size;
+	string line_of_elements;
+	string element;
+	int length_element;
+
+	if ((HowToOut = Is_Numeral_Element_and_Skip_Strings(3, ifst)) == 0)
+		return 0;
+
+	if ((size = Is_Numeral_Element_and_Skip_Strings(2, ifst)) == 0)
+		return 0;
+
+	getline(ifst, line_of_elements, '\n');
+
 	int RealSize = size * size - size;
 	RealSize = RealSize / 2;
 	RealSize = RealSize + size;
@@ -293,8 +395,30 @@ void triagonal::InData(ifstream &ifst)
 
 	for (int i = 0; i < RealSize; i++)
 	{
-		ifst >> mass[i];
+		if (line_of_elements.length() == 0)
+			return 0;
+
+		length_element = line_of_elements.find(' ');
+
+		if (length_element > 0)
+		{
+			element = line_of_elements.substr(0, length_element);
+			length_element++;
+		}
+		else
+		{
+			length_element = line_of_elements.length();
+			element = line_of_elements;
+		}
+
+		if (!isdigit(unsigned char(element.front())))
+			return 0;
+
+		mass[i] = stoul(element);
+		element = "";
+		line_of_elements.erase(0, length_element);
 	}
+	return 1;
 }
 
 void triagonal::Out(ofstream &ofst)

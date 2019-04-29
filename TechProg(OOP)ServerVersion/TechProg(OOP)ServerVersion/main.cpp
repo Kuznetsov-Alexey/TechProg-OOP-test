@@ -18,14 +18,7 @@ int main(int argc, char* argv[])
 	ofstream ofst("output.txt"); // с ними было удобнее работать
 	cout << "Start" << endl;
 	container c;
-	bool Error = false;
-	Error = c.In(ifst);
-	if (Error)
-	{
-		cout << "Error Incorrect Data in File";
-		system("pause");
-		return 0;
-	}
+	c.In(ifst);
 	ofst << "Filled container. " << endl;
 	c.Sorting();
 	c.Out(ofst);

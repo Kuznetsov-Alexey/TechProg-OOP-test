@@ -2,6 +2,7 @@
 
 #include "iostream"
 #include "fstream"
+#include <string>
 
 using namespace std;
 
@@ -9,12 +10,13 @@ class type
 {
 public:
 	// иденитфикация, порождение и ввод объекта из потока
-	static type* In(ifstream &ifst, type *current);		//Для ввода последующих эл-ов
-	virtual void InData(ifstream &ifst) = 0;			// ввод с учетом типа объекта
+	static type * InType(ifstream &ifst, type *current);		//Для ввода последующих эл-ов
+	virtual bool InData(ifstream &ifst) = 0;			// ввод с учетом типа объекта
 	virtual void Out(ofstream &ofst) = 0;// вывод с учетом типа объекта
 	virtual void OutDiagonal(ofstream &ofst);
 	virtual int SumOfElements() = 0;
 	bool Compare(type *current);
+	static int Is_Numeral_Element_and_Skip_Strings(int repeat, ifstream &ifst);
 
 	int *mass;
 	type *next;
@@ -25,12 +27,11 @@ public:
 class container
 {
 	int len;			//кол-во элементов
-
 public:
 
 	type *current;	//указатель на текущий элемент
 
-	bool In(ifstream &ifst);	//ввод матриц
+	void In(ifstream &ifst);	//ввод матриц
 	void Out(ofstream &ofst);	//вывод матриц
 	void Clear();				//очистка контейнера
 	void Sorting();
@@ -46,7 +47,7 @@ class diagonal : public type {
 public:
 
 	// переопределяем интерфейс класса
-	void InData(ifstream &ifst); // ввод
+	bool InData(ifstream &ifst); // ввод
 	void Out(ofstream &ofst); // вывод
 	int SumOfElements();
 	void OutDiagonal(ofstream &ofst);
@@ -57,11 +58,10 @@ public:
 class matrix : public type {
 	int size;
 	int *mass;
-
 public:
 
 	// переопределяем интерфейс класса
-	void InData(ifstream &ifst); // ввод
+	bool InData(ifstream &ifst); // ввод
 	void Out(ofstream &ofst); // вывод
 	int SumOfElements();
 
@@ -71,10 +71,9 @@ public:
 class triagonal : public type {
 	int size;
 	int *mass;
-
 public:
 	// переопределяем интерфейс класса
-	void InData(ifstream &ifst); // ввод
+	bool InData(ifstream &ifst); // ввод
 	void Out(ofstream &ofst); // вывод
 	int SumOfElements();
 	triagonal() {} // создание без инициализации.
