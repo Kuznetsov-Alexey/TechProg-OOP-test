@@ -10,71 +10,60 @@ class type
 {
 public:
 	// иденитфикация, порождение и ввод объекта из потока
-	static type * InType(ifstream &ifst, type *current);		//Для ввода последующих эл-ов
-	virtual bool InData(ifstream &ifst) = 0;			// ввод с учетом типа объекта
-	virtual void Out(ofstream &ofst) = 0;// вывод с учетом типа объекта
-	virtual void OutDiagonal(ofstream &ofst);
-	virtual int SumOfElements() = 0;
-	bool Compare(type *current);
+	static type * Input_type(ifstream &ifst, type *current);//чтение из файла, классификация объекта по типу
+	virtual bool Input_objects_data(ifstream &ifst) = 0;//ввод с учетом типа объекта
+	virtual void Output_single_element (ofstream &ofst) = 0;//вывод с учетом типа объекта
+	virtual void Output_diagonal(ofstream &ofst);//фильтрованный вывод
+	virtual int Sum_of_elements() = 0;//подсчет суммы элементов в матрице
+	bool Compare_two_matrix(type *current);//сравнение двух матриц
 	static int Is_Numeral_Element_and_Skip_Strings(int repeat, ifstream &ifst);
 
-	int *mass;
-	type *next;
-	int HowToOut;
+	int *object_data;//массив элементов матрицы
+	type *next_element;//указатель на следующий элемент
+	int how_to_out;//способ вывода матрицы
 };
-
 
 class container
 {
-	int len;			//кол-во элементов
+	int length;//кол-во элементов
 public:
-
 	type *current;	//указатель на текущий элемент
-
-	void In(ifstream &ifst);	//ввод матриц
-	void Out(ofstream &ofst);	//вывод матриц
-	void Clear();				//очистка контейнера
-	void Sorting();
-	void FiltredOut(ofstream &ofst);
-	void OutputDiagonal(ofstream &ofst);
-	container();				//инициализация контейнера
+	void Input_from_file(ifstream &ifst);//ввод матриц
+	void Output_in_file(ofstream &ofst);//вывод матриц
+	void Clear();//очистка контейнера
+	void Sorting();//сортировка контейнера
+	void Filtred_out(ofstream &ofst);//фильтрованный вывод, первый вариант
+	void Output_only_diagonal(ofstream &ofst);//фильтрованный вывод, второй вариант
+	container();//инициализация контейнера
 };
 
-
 class diagonal : public type {
-	int size;
-	int *mass;
+	int size_of_matrix;
+	int *matrix_mass;
 public:
-
-	// переопределяем интерфейс класса
-	bool InData(ifstream &ifst); // ввод
-	void Out(ofstream &ofst); // вывод
-	int SumOfElements();
-	void OutDiagonal(ofstream &ofst);
-
+	bool Input_objects_data(ifstream &ifst); // ввод
+	void Output_single_element(ofstream &ofst); // вывод
+	int Sum_of_elements();
+	void Output_diagonal(ofstream &ofst);
 	diagonal() {} // создание без инициализации.
 };
 
 class matrix : public type {
-	int size;
-	int *mass;
+	int size_of_matrix;
+	int *matrix_mass;
 public:
-
-	// переопределяем интерфейс класса
-	bool InData(ifstream &ifst); // ввод
-	void Out(ofstream &ofst); // вывод
-	int SumOfElements();
-
+	bool Input_objects_data(ifstream &ifst); // ввод
+	void Output_single_element(ofstream &ofst); // вывод
+	int Sum_of_elements();
 	matrix() {} // создание без инициализации.
 };
 
 class triagonal : public type {
-	int size;
-	int *mass;
+	int size_of_matrix;
+	int *matrix_mass;
 public:
-	// переопределяем интерфейс класса
-	bool InData(ifstream &ifst); // ввод
-	void Out(ofstream &ofst); // вывод
-	int SumOfElements();
+	bool Input_objects_data(ifstream &ifst); // ввод
+	void Output_single_element(ofstream &ofst); // вывод
+	int Sum_of_elements();
 	triagonal() {} // создание без инициализации.
 };

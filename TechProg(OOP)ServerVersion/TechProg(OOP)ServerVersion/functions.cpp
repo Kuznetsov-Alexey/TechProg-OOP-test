@@ -1,192 +1,180 @@
 #include "header.h"
 
-void container::In(ifstream &ifst)
+void container::Input_from_file(ifstream &ifst)
 {
-	bool ErrorFlag = false;
-	while ((!ifst.eof())&&(!ErrorFlag)) 
+	while ((!ifst.eof()))
 	{
-
-		if (container::current == NULL)
+		if (current == NULL)
 		{
-			if ((container::current = type::InType(ifst, current)) != 0)
-				len++;
+			if ((current = type::Input_type(ifst, current)) != 0)
+				length++;
 		}
 		else
 		{
-			if(type::InType(ifst, current)!= 0)
-				len++;
+			if(type::Input_type(ifst, current)!= 0)
+				length++;
 		}
 	}	
 }
 
-void container::Out(ofstream &ofst)
+void container::Output_in_file(ofstream &ofst)
 {
-	ofst << "Container contents " << len
+	ofst << "Container contents " << length
 		<< " elements." << endl;
-
-	for (int i = 0; i < len; i++) {
+	for (int i = 0; i < length; i++) {
 		ofst << i + 1 << ": ";
-		if (len > 0)
+		if (length > 0)
 		{
-			current->Out(ofst);
-			current = current->next;
+			current->Output_single_element(ofst);
+			current = current->next_element;
 		}
 	}
 }
 
 void container::Clear()
 {
-	while (len > 0)
+	while (length > 0)
 	{
-		if (len == 1)
+		if (length == 1)
 		{
-			type *temp = current;
+			type *temporary = current;
 			current = NULL;
-			free(temp);
-			len = len - 1;
+			free(temporary);
+			length = length - 1;
 			break;
 		}
-		type *temp;
-		temp = current->next;
-		while (temp->next != current)
-			temp = temp->next;
+		type *temporary;
+		temporary = current->next_element;
+		while (temporary->next_element != current)
+			temporary = temporary->next_element;
 
-		temp->next = current->next;
+		temporary->next_element = current->next_element;
 		free(current);
-		current = temp;
-		len = len - 1;
+		current = temporary;
+		length = length - 1;
 	}
-
-
-
 }
 
-void container::FiltredOut(ofstream &ofst)
+void container::Filtred_out(ofstream &ofst)
 {
-	int DiagonalCount = 0;
-	for (int i = 0; i < len; i++)
+	int diagonal_count = 0;
+	for (int i = 0; i < length; i++)
 	{
 		diagonal* Temporary = dynamic_cast<diagonal*>(current);
 		if (Temporary)
-			DiagonalCount++;
-		current = current->next;
+			diagonal_count++;
+		current = current->next_element;
 	}
-	ofst << "Container contents " << DiagonalCount
+	ofst << "Container contents " << diagonal_count
 		<< " Diagonal elements." << endl;
 
-	DiagonalCount = 1;
-
-	for (int i = 0; i < len; i++) {
-
-		if (len > 0)
+	diagonal_count = 1;
+	for (int i = 0; i < length; i++)
+	{
+		if (length > 0)
 		{
 			diagonal* Temporary = dynamic_cast<diagonal*>(current);
 			if (Temporary)
 			{
-				ofst << DiagonalCount << ": ";
-				current->Out(ofst);
-				DiagonalCount++;
+				ofst << diagonal_count << ": ";
+				current->Output_single_element(ofst);
+				diagonal_count++;
 			}
-			current = current->next;
+			current = current->next_element;
 		}
 	}
 }
 
-void container::OutputDiagonal(ofstream &ofst)
+void container::Output_only_diagonal(ofstream &ofst)
 {
 	ofst << "Only Diagonal matrix." << endl;
-	for (int i = 0; i < len; i++)
+	for (int i = 0; i < length; i++)
 	{
 		ofst << i << ": ";
-		current->OutDiagonal(ofst);
-		current = current->next;
+		current->Output_diagonal(ofst);
+		current = current->next_element;
 	}
 }
 
 container::container()
 {
 	current = NULL;
-	len = 0;
+	length = 0;
 }
 
 void container::Sorting()
 {
-	for (int i = 0; i < len - 1; i++)
+	for (int i = 0; i < length - 1; i++)
 	{
-		for (int j = 0; j < len - 1; j++)
+		for (int j = 0; j < length - 1; j++)
 		{
-			if (current->Compare(current))
+			if (current->Compare_two_matrix(current))
 			{
 				type *previously1 = current;
+				while (previously1->next_element != current)
+					previously1 = previously1->next_element;
 
-				while (previously1->next != current)
-					previously1 = previously1->next;
+				type *next1 = current->next_element;
+				type *next2 = current->next_element->next_element;
 
-				type *next1 = current->next;
-				type *next2 = current->next->next;
-
-				current->next->next = current;
-				current->next = next2;
-				previously1->next = next1;
+				current->next_element->next_element = current;
+				current->next_element = next2;
+				previously1->next_element = next1;
 				current = next1;
 			}
-			current = current->next;
+			current = current->next_element;
 		}
-		current = current->next;
+		current = current->next_element;
 	}	
 }
 
-
-type* type::InType(ifstream &ifst, type *current)
+type* type::Input_type(ifstream &ifst, type *current)
 {
-	int key;
-	if ((key = Is_Numeral_Element_and_Skip_Strings(4, ifst)) == 0)
+	int type_of_element;
+	if ((type_of_element = Is_Numeral_Element_and_Skip_Strings(4, ifst)) == 0)
 		return 0;
 
-	type *temporary, *point;	//Временные указатели
-	bool success_input;
-	
-	switch (key)
+	type *object_from_file, *point;	//Временные указатели
+	bool success_input;	
+	switch (type_of_element)
 	{
 		case 1:
-			temporary = new diagonal; break;
+			object_from_file = new diagonal; break;
 		case 2:
-			temporary = new matrix; break;
+			object_from_file = new matrix; break;
 		case 3:
-			temporary = new triagonal; break;
+			object_from_file = new triagonal; break;
 
 		default:
 			Is_Numeral_Element_and_Skip_Strings(4, ifst);
 			return 0;
 	}
 	
-	success_input = temporary->InData(ifst);
-
+	success_input = object_from_file->Input_objects_data(ifst);
 	if (!success_input)
 		return 0;
 	if (current == NULL)
-		temporary->next = temporary; // указатель на сам корневой узел		
+		object_from_file->next_element = object_from_file; // указатель на сам корневой узел		
 	
 	else
 	{
-		point = current->next; // сохранение указателя на следующий элемент
-		current->next = temporary; // предыдущий узел указывает на создаваемый
-		temporary->next = point; // созданный узел указывает на следующий элемент
-		current->mass = temporary->mass;
+		point = current->next_element; // сохранение указателя на следующий элемент
+		current->next_element = object_from_file; // предыдущий узел указывает на создаваемый
+		object_from_file->next_element = point; // созданный узел указывает на следующий элемент
 	}
-	return temporary;
+	return object_from_file;
 }
 
-void type::OutDiagonal(ofstream &ofst)
+void type::Output_diagonal(ofstream &ofst)
 {
 	ofst << endl;
 }
 
-bool type::Compare(type *current)
+bool type::Compare_two_matrix(type *current)
 {
-	int FirstSum = SumOfElements();
-	int SecondSum = next->SumOfElements();
-	return(FirstSum > SecondSum);
+	int first_sum = Sum_of_elements();
+	int second_sum = next_element->Sum_of_elements();
+	return(first_sum > second_sum);
 }
 
 int type::Is_Numeral_Element_and_Skip_Strings(int repeat, ifstream &ifst)
@@ -205,25 +193,22 @@ int type::Is_Numeral_Element_and_Skip_Strings(int repeat, ifstream &ifst)
 	return result;
 }
 
-
-bool diagonal::InData(ifstream &ifst)
+bool diagonal::Input_objects_data(ifstream &ifst)
 {
 	string line_of_elements;
-	string element;
+	string numeral_from_string;
 	int length_element;
 
-	if ((HowToOut = Is_Numeral_Element_and_Skip_Strings(3, ifst)) == 0)
+	if ((how_to_out = Is_Numeral_Element_and_Skip_Strings(3, ifst)) == 0)
 		return 0;
 
-	if ((size = Is_Numeral_Element_and_Skip_Strings(2, ifst)) == 0)
+	if ((size_of_matrix = Is_Numeral_Element_and_Skip_Strings(2, ifst)) == 0)
 		return 0;
 
 	getline(ifst, line_of_elements, '\n');
-
-	mass = new int[size]; // массив значений эл-ов главной диагонали
-	for (int i = 0; i < size; i++)
-	{
-		
+	matrix_mass = new int[size_of_matrix]; // массив значений эл-ов главной диагонали
+	for (int i = 0; i < size_of_matrix; i++)
+	{		
 		if (line_of_elements.length() == 0)
 			return 0;
 
@@ -231,90 +216,87 @@ bool diagonal::InData(ifstream &ifst)
 
 		if (length_element > 0)
 		{
-			element = line_of_elements.substr(0, length_element);
+			numeral_from_string = line_of_elements.substr(0, length_element);
 			length_element++;
 		}
 		else
 		{
 			length_element = line_of_elements.length();
-			element = line_of_elements;
+			numeral_from_string = line_of_elements;
 		}
 
-		if (!isdigit(unsigned char(element.front())))
+		if (!isdigit(unsigned char(numeral_from_string.front())))
 			return 0;
 
-		mass[i] = stoul(element);
-		element = "";
+		matrix_mass[i] = stoul(numeral_from_string);
+		numeral_from_string = "";
 		line_of_elements.erase(0, length_element);
 	}
 	return 1;
 }
 
-void diagonal::Out(ofstream &ofst)
+void diagonal::Output_single_element(ofstream &ofst)
 {
-	ofst << "It's Diagonal matrix " << size << "x" << size << endl;
+	ofst << "It's Diagonal matrix " << size_of_matrix << "x" << size_of_matrix << endl;
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < size_of_matrix; i++)
 	{
-		int j = size - i;
-		int k = i + 1;
-		while (j < size)
+		int count_nulls_before_unit = size_of_matrix - i;
+		int count_nulls_after_unit = i + 1;
+		while (count_nulls_before_unit < size_of_matrix)
 		{
 			ofst << "0 ";
-			j++;
+			count_nulls_before_unit++;
 		}
 
-		ofst << mass[i];
+		ofst << matrix_mass[i];
 
-		while (k < size)
+		while (count_nulls_after_unit < size_of_matrix)
 		{
 			ofst << " 0";
-			k++;
+			count_nulls_after_unit++;
 		}
-		if (HowToOut == 1)
+		if (how_to_out == 1)
 			ofst << endl;
 		else
 			ofst << " ";
 	}
 
-	if (HowToOut != 1)
+	if (how_to_out != 1)
 		ofst << endl;
 
 	ofst << endl;
 }
 
-int diagonal::SumOfElements()
+int diagonal::Sum_of_elements()
 {
-	int sum = 0;
-	for (int i = 0; i < size; i++)
-			sum = sum + mass[i];
+	int sum_of_elements = 0;
+	for (int i = 0; i < size_of_matrix; i++)
+			sum_of_elements = sum_of_elements + matrix_mass[i];
 
-	return sum;
+	return sum_of_elements;
 }
 
-void diagonal::OutDiagonal(ofstream &ofst)
+void diagonal::Output_diagonal(ofstream &ofst)
 {
-	Out(ofst);
+	Output_single_element(ofst);
 }
 
-
-bool matrix::InData(ifstream &ifst)
+bool matrix::Input_objects_data(ifstream &ifst)
 {
 	string line_of_elements;
-	string element;
+	string numeral_from_string;
 	int length_element;
 
-	if ((HowToOut = Is_Numeral_Element_and_Skip_Strings(3, ifst)) == 0)
+	if ((how_to_out = Is_Numeral_Element_and_Skip_Strings(3, ifst)) == 0)
 		return 0;
 
-	if ((size = Is_Numeral_Element_and_Skip_Strings(2, ifst)) == 0)
+	if ((size_of_matrix = Is_Numeral_Element_and_Skip_Strings(2, ifst)) == 0)
 		return 0;
 
 	getline(ifst, line_of_elements, '\n');
-
-	mass = new int[size*size]; // массив значений 
-
-	for (int i = 0; i < size*size; i++)
+	matrix_mass = new int[size_of_matrix*size_of_matrix]; // массив значений 
+	for (int i = 0; i < size_of_matrix*size_of_matrix; i++)
 	{
 		if (line_of_elements.length() == 0)
 			return 0;
@@ -323,77 +305,75 @@ bool matrix::InData(ifstream &ifst)
 
 		if (length_element > 0)
 		{
-			element = line_of_elements.substr(0, length_element);
+			numeral_from_string = line_of_elements.substr(0, length_element);
 			length_element++;
 		}
 		else
 		{
 			length_element = line_of_elements.length();
-			element = line_of_elements;
+			numeral_from_string = line_of_elements;
 		}
 
-		if (!isdigit(unsigned char(element.front())))
+		if (!isdigit(unsigned char(numeral_from_string.front())))
 			return 0;
 
-		mass[i] = stoul(element);
-		element = "";
+		matrix_mass[i] = stoul(numeral_from_string);
+		numeral_from_string = "";
 		line_of_elements.erase(0, length_element);
 	}
 	return 1;
 }
 
-void matrix::Out(ofstream &ofst)
+void matrix::Output_single_element(ofstream &ofst)
 {
-	ofst << "It's Casual matrix " << size << "x" << size << endl;
-	for (int i = 0; i < size; i++)
+	ofst << "It's Casual matrix " << size_of_matrix << "x" << size_of_matrix << endl;
+	for (int i = 0; i < size_of_matrix; i++)
 	{
-		for (int j = 0; j < size; j++)
+		for (int j = 0; j < size_of_matrix; j++)
 		{
-			ofst << mass[i*size + j] << " ";
+			ofst << matrix_mass[i * size_of_matrix + j] << " ";
 		}
 
-		if (HowToOut == 1)
+		if (how_to_out == 1)
 			ofst << endl;
 		else
 			ofst << " ";
 	}
 
-	if (HowToOut != 1)
+	if (how_to_out != 1)
 		ofst << endl;
 	ofst << endl;
 }
 
-int matrix::SumOfElements()
+int matrix::Sum_of_elements()
 {
-	int sum = 0;
-	for (int i = 0; i < size*size; i++)
-		sum = sum + mass[i];
+	int sum_of_elements = 0;
+	for (int i = 0; i < size_of_matrix*size_of_matrix; i++)
+		sum_of_elements = sum_of_elements + matrix_mass[i];
 
-	return sum;
+	return sum_of_elements;
 }
 
-
-bool triagonal::InData(ifstream &ifst)
+bool triagonal::Input_objects_data(ifstream &ifst)
 {
 	string line_of_elements;
-	string element;
+	string numeral_from_string;
 	int length_element;
 
-	if ((HowToOut = Is_Numeral_Element_and_Skip_Strings(3, ifst)) == 0)
+	if ((how_to_out = Is_Numeral_Element_and_Skip_Strings(3, ifst)) == 0)
 		return 0;
 
-	if ((size = Is_Numeral_Element_and_Skip_Strings(2, ifst)) == 0)
+	if ((size_of_matrix = Is_Numeral_Element_and_Skip_Strings(2, ifst)) == 0)
 		return 0;
 
 	getline(ifst, line_of_elements, '\n');
 
-	int RealSize = size * size - size;
-	RealSize = RealSize / 2;
-	RealSize = RealSize + size;
+	int real_data_size = size_of_matrix * size_of_matrix - size_of_matrix;
+	real_data_size = real_data_size / 2;
+	real_data_size = real_data_size + size_of_matrix;
 
-	mass = new int[RealSize];
-
-	for (int i = 0; i < RealSize; i++)
+	matrix_mass = new int[real_data_size];
+	for (int i = 0; i < real_data_size; i++)
 	{
 		if (line_of_elements.length() == 0)
 			return 0;
@@ -402,70 +382,69 @@ bool triagonal::InData(ifstream &ifst)
 
 		if (length_element > 0)
 		{
-			element = line_of_elements.substr(0, length_element);
+			numeral_from_string = line_of_elements.substr(0, length_element);
 			length_element++;
 		}
 		else
 		{
 			length_element = line_of_elements.length();
-			element = line_of_elements;
+			numeral_from_string = line_of_elements;
 		}
 
-		if (!isdigit(unsigned char(element.front())))
+		if (!isdigit(unsigned char(numeral_from_string.front())))
 			return 0;
 
-		mass[i] = stoul(element);
-		element = "";
+		matrix_mass[i] = stoul(numeral_from_string);
+		numeral_from_string = "";
 		line_of_elements.erase(0, length_element);
 	}
 	return 1;
 }
 
-void triagonal::Out(ofstream &ofst)
+void triagonal::Output_single_element(ofstream &ofst)
 {
-	ofst << "It's Triagonal matrix " << size << "x" << size << endl;
+	ofst << "It's Triagonal matrix " << size_of_matrix << "x" << size_of_matrix << endl;
 
-	int RealMass = 0;
-
-	for (int i = 0; i < size; i++)
+	int point_to_real_elements = 0;
+	for (int i = 0; i < size_of_matrix; i++)
 	{
-		int j = size - i - 1;
-		int k = i + 1;				
+		int count_real_elements = size_of_matrix - i - 1;
+		int count_zero_elements = i + 1;				
 
-		while (j < size)
+		while (count_real_elements < size_of_matrix)
 		{
-			ofst << mass[RealMass] << " ";
-			RealMass++;
-			j++;
+			ofst << matrix_mass[point_to_real_elements] << " ";
+			point_to_real_elements++;
+			count_real_elements++;
 		}
 		
-		while (k < size)
+		while (count_zero_elements < size_of_matrix)
 		{
 			ofst << "0 ";
-			k++;
+			count_zero_elements++;
 		}
 
-		if (HowToOut == 1)
+		if (how_to_out == 1)
 			ofst << endl;
 	}
 
-	if (HowToOut != 1)
+	if (how_to_out != 1)
 		ofst << endl;
 
 	ofst << endl;
 }
 
-int triagonal::SumOfElements()
+int triagonal::Sum_of_elements()
 {
-	int sum = 0;
-	int RealSize = size * size - size;
-	RealSize = RealSize / 2;
-	RealSize = RealSize + size;
+	int sum_of_elements = 0;
+	int real_data_size = size_of_matrix * size_of_matrix - size_of_matrix;
+	real_data_size = real_data_size / 2;
+	real_data_size = real_data_size + size_of_matrix;
 
-	for (int i = 0; i < RealSize; i++)
-		sum = sum + mass[i];
+	for (int i = 0; i < real_data_size; i++)
+		sum_of_elements = sum_of_elements + matrix_mass[i];
 
-	return sum;
+	return sum_of_elements;
 }
 
 
