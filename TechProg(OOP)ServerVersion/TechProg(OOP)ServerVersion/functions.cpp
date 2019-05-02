@@ -96,6 +96,27 @@ void container::Output_only_diagonal(ofstream &ofst)
 	}
 }
 
+void container::Multimethod(ofstream &ofst)
+{
+	type *First_point = current;
+	type *Second_point = First_point->next_element;
+
+	ofst << "Multimethod." << endl;
+	
+	for (int i = 0; i < length - 1; i++)
+	{
+		for (int j = i + 1; j < length; j++)
+		{
+			First_point->Multimethod_first_element_type(Second_point, ofst);
+			First_point->Output_single_element(ofst);
+			Second_point->Output_single_element(ofst);
+			Second_point = Second_point->next_element;
+		}
+		First_point = First_point->next_element;
+		Second_point = First_point->next_element;
+	}
+}
+
 container::container()
 {
 	current = NULL;
@@ -445,6 +466,66 @@ int triagonal::Sum_of_elements()
 		sum_of_elements = sum_of_elements + matrix_mass[i];
 
 	return sum_of_elements;
+}
+
+void diagonal::Multimethod_first_element_type(type *current, ofstream &ofst)
+{
+	current->Multimethod_first_diagonal(ofst);
+}
+
+void diagonal::Multimethod_first_diagonal(ofstream &ofst)
+{
+	ofst << "Diagonal and Diagonal" << endl;
+}
+
+void diagonal::Multimethod_first_matrix(ofstream &ofst)
+{
+	ofst << "Casual Matrix and Diagonal" << endl;
+}
+
+void diagonal::Multimethod_first_triagonal(ofstream &ofst)
+{
+	ofst << "Triagonal matrix and Diagonal" << endl;
+}
+
+void matrix::Multimethod_first_element_type(type *current, ofstream &ofst)
+{
+	current->Multimethod_first_matrix(ofst);
+}
+
+void matrix::Multimethod_first_diagonal(ofstream &ofst)
+{
+	ofst << "Diagonal and Casual Matrix" << endl;
+}
+
+void matrix::Multimethod_first_matrix(ofstream &ofst)
+{
+	ofst << "Casual Matrix and Casual Matrix" << endl;
+}
+
+void matrix::Multimethod_first_triagonal(ofstream &ofst)
+{
+	ofst << "Triagonal matrix and Casual Matrix" << endl;
+}
+
+void triagonal::Multimethod_first_element_type(type *current, ofstream &ofst)
+{
+	current->Multimethod_first_triagonal(ofst);
+}
+
+void triagonal::Multimethod_first_diagonal(ofstream &ofst)
+{
+	ofst << "Diagonal and Triagonal matrix" << endl;
+}
+
+void triagonal::Multimethod_first_matrix(ofstream &ofst)
+{
+	ofst << "Casual Matrix and Triagonal matrix" << endl;
+}
+
+void triagonal::Multimethod_first_triagonal(ofstream &ofst)
+{
+	ofst << "Triagonal matrix and Triagonal matrix" << endl;
 }
 
 

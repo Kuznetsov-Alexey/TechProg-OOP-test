@@ -9,6 +9,7 @@ int main(int argc, char* argv[])
 	c.Input_from_file(ifst);
 	ofst << "Filled container. " << endl;
 	c.Sorting();
+	c.Multimethod(ofst);
 	c.Output_in_file(ofst);
 	c.Filtred_out(ofst);
 	c.Output_only_diagonal(ofst);

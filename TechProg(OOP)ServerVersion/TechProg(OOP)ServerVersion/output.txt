@@ -1,16 +1,421 @@
 Filled container. 
+Multimethod.
+Triagonal matrix and Diagonal
+It's Triagonal matrix 2x2
+1 0 
+2 3 
+
+It's Diagonal matrix 3x3
+3 0 0
+0 2 0
+0 0 3
+
+Triagonal matrix and Diagonal
+It's Triagonal matrix 2x2
+1 0 
+2 3 
+
+It's Diagonal matrix 4x4
+5 0 0 0
+0 2 0 0
+0 0 1 0
+0 0 0 5
+
+Triagonal matrix and Diagonal
+It's Triagonal matrix 2x2
+1 0 
+2 3 
+
+It's Diagonal matrix 3x3
+9 0 0
+0 9 0
+0 0 9
+
+Triagonal matrix and Casual Matrix
+It's Triagonal matrix 2x2
+1 0 
+2 3 
+
+It's Casual matrix 3x3
+1 8 9 
+4 5 6 
+1 2 3 
+
+Triagonal matrix and Casual Matrix
+It's Triagonal matrix 2x2
+1 0 
+2 3 
+
+It's Casual matrix 3x3
+2 2 3 
+4 5 6 
+7 8 9 
+
+Triagonal matrix and Casual Matrix
+It's Triagonal matrix 2x2
+1 0 
+2 3 
+
+It's Casual matrix 3x3
+4 9 9 
+9 9 9 
+9 9 9 
+
+Triagonal matrix and Casual Matrix
+It's Triagonal matrix 2x2
+1 0 
+2 3 
+
+It's Casual matrix 3x3
+9 18 27 
+36 45 54 
+63 72 81 
+
+Triagonal matrix and Diagonal
+It's Triagonal matrix 2x2
+1 0 
+2 3 
+
+It's Diagonal matrix 3x3
+121 0 0
+0 144 0
+0 0 169
+
+Diagonal and Diagonal
+It's Diagonal matrix 3x3
+3 0 0
+0 2 0
+0 0 3
+
+It's Diagonal matrix 4x4
+5 0 0 0
+0 2 0 0
+0 0 1 0
+0 0 0 5
+
+Diagonal and Diagonal
+It's Diagonal matrix 3x3
+3 0 0
+0 2 0
+0 0 3
+
+It's Diagonal matrix 3x3
+9 0 0
+0 9 0
+0 0 9
+
+Diagonal and Casual Matrix
+It's Diagonal matrix 3x3
+3 0 0
+0 2 0
+0 0 3
+
+It's Casual matrix 3x3
+1 8 9 
+4 5 6 
+1 2 3 
+
+Diagonal and Casual Matrix
+It's Diagonal matrix 3x3
+3 0 0
+0 2 0
+0 0 3
+
+It's Casual matrix 3x3
+2 2 3 
+4 5 6 
+7 8 9 
+
+Diagonal and Casual Matrix
+It's Diagonal matrix 3x3
+3 0 0
+0 2 0
+0 0 3
+
+It's Casual matrix 3x3
+4 9 9 
+9 9 9 
+9 9 9 
+
+Diagonal and Casual Matrix
+It's Diagonal matrix 3x3
+3 0 0
+0 2 0
+0 0 3
+
+It's Casual matrix 3x3
+9 18 27 
+36 45 54 
+63 72 81 
+
+Diagonal and Diagonal
+It's Diagonal matrix 3x3
+3 0 0
+0 2 0
+0 0 3
+
+It's Diagonal matrix 3x3
+121 0 0
+0 144 0
+0 0 169
+
+Diagonal and Diagonal
+It's Diagonal matrix 4x4
+5 0 0 0
+0 2 0 0
+0 0 1 0
+0 0 0 5
+
+It's Diagonal matrix 3x3
+9 0 0
+0 9 0
+0 0 9
+
+Diagonal and Casual Matrix
+It's Diagonal matrix 4x4
+5 0 0 0
+0 2 0 0
+0 0 1 0
+0 0 0 5
+
+It's Casual matrix 3x3
+1 8 9 
+4 5 6 
+1 2 3 
+
+Diagonal and Casual Matrix
+It's Diagonal matrix 4x4
+5 0 0 0
+0 2 0 0
+0 0 1 0
+0 0 0 5
+
+It's Casual matrix 3x3
+2 2 3 
+4 5 6 
+7 8 9 
+
+Diagonal and Casual Matrix
+It's Diagonal matrix 4x4
+5 0 0 0
+0 2 0 0
+0 0 1 0
+0 0 0 5
+
+It's Casual matrix 3x3
+4 9 9 
+9 9 9 
+9 9 9 
+
+Diagonal and Casual Matrix
+It's Diagonal matrix 4x4
+5 0 0 0
+0 2 0 0
+0 0 1 0
+0 0 0 5
+
+It's Casual matrix 3x3
+9 18 27 
+36 45 54 
+63 72 81 
+
+Diagonal and Diagonal
+It's Diagonal matrix 4x4
+5 0 0 0
+0 2 0 0
+0 0 1 0
+0 0 0 5
+
+It's Diagonal matrix 3x3
+121 0 0
+0 144 0
+0 0 169
+
+Diagonal and Casual Matrix
+It's Diagonal matrix 3x3
+9 0 0
+0 9 0
+0 0 9
+
+It's Casual matrix 3x3
+1 8 9 
+4 5 6 
+1 2 3 
+
+Diagonal and Casual Matrix
+It's Diagonal matrix 3x3
+9 0 0
+0 9 0
+0 0 9
+
+It's Casual matrix 3x3
+2 2 3 
+4 5 6 
+7 8 9 
+
+Diagonal and Casual Matrix
+It's Diagonal matrix 3x3
+9 0 0
+0 9 0
+0 0 9
+
+It's Casual matrix 3x3
+4 9 9 
+9 9 9 
+9 9 9 
+
+Diagonal and Casual Matrix
+It's Diagonal matrix 3x3
+9 0 0
+0 9 0
+0 0 9
+
+It's Casual matrix 3x3
+9 18 27 
+36 45 54 
+63 72 81 
+
+Diagonal and Diagonal
+It's Diagonal matrix 3x3
+9 0 0
+0 9 0
+0 0 9
+
+It's Diagonal matrix 3x3
+121 0 0
+0 144 0
+0 0 169
+
+Casual Matrix and Casual Matrix
+It's Casual matrix 3x3
+1 8 9 
+4 5 6 
+1 2 3 
+
+It's Casual matrix 3x3
+2 2 3 
+4 5 6 
+7 8 9 
+
+Casual Matrix and Casual Matrix
+It's Casual matrix 3x3
+1 8 9 
+4 5 6 
+1 2 3 
+
+It's Casual matrix 3x3
+4 9 9 
+9 9 9 
+9 9 9 
+
+Casual Matrix and Casual Matrix
+It's Casual matrix 3x3
+1 8 9 
+4 5 6 
+1 2 3 
+
+It's Casual matrix 3x3
+9 18 27 
+36 45 54 
+63 72 81 
+
+Casual Matrix and Diagonal
+It's Casual matrix 3x3
+1 8 9 
+4 5 6 
+1 2 3 
+
+It's Diagonal matrix 3x3
+121 0 0
+0 144 0
+0 0 169
+
+Casual Matrix and Casual Matrix
+It's Casual matrix 3x3
+2 2 3 
+4 5 6 
+7 8 9 
+
+It's Casual matrix 3x3
+4 9 9 
+9 9 9 
+9 9 9 
+
+Casual Matrix and Casual Matrix
+It's Casual matrix 3x3
+2 2 3 
+4 5 6 
+7 8 9 
+
+It's Casual matrix 3x3
+9 18 27 
+36 45 54 
+63 72 81 
+
+Casual Matrix and Diagonal
+It's Casual matrix 3x3
+2 2 3 
+4 5 6 
+7 8 9 
+
+It's Diagonal matrix 3x3
+121 0 0
+0 144 0
+0 0 169
+
+Casual Matrix and Casual Matrix
+It's Casual matrix 3x3
+4 9 9 
+9 9 9 
+9 9 9 
+
+It's Casual matrix 3x3
+9 18 27 
+36 45 54 
+63 72 81 
+
+Casual Matrix and Diagonal
+It's Casual matrix 3x3
+4 9 9 
+9 9 9 
+9 9 9 
+
+It's Diagonal matrix 3x3
+121 0 0
+0 144 0
+0 0 169
+
+Casual Matrix and Diagonal
+It's Casual matrix 3x3
+9 18 27 
+36 45 54 
+63 72 81 
+
+It's Diagonal matrix 3x3
+121 0 0
+0 144 0
+0 0 169
+
 Container contents 9 elements.
 1: It's Triagonal matrix 2x2
-1 0 2 3 
+1 0 
+2 3 
 
 2: It's Diagonal matrix 3x3
-3 0 0 0 2 0 0 0 3 
+3 0 0
+0 2 0
+0 0 3
 
 3: It's Diagonal matrix 4x4
-5 0 0 0 0 2 0 0 0 0 1 0 0 0 0 5 
+5 0 0 0
+0 2 0 0
+0 0 1 0
+0 0 0 5
 
 4: It's Diagonal matrix 3x3
-9 0 0 0 9 0 0 0 9 
+9 0 0
+0 9 0
+0 0 9
 
 5: It's Casual matrix 3x3
 1 8 9 
@@ -33,38 +438,58 @@ Container contents 9 elements.
 63 72 81 
 
 9: It's Diagonal matrix 3x3
-121 0 0 0 144 0 0 0 169 
+121 0 0
+0 144 0
+0 0 169
 
 Container contents 4 Diagonal elements.
 1: It's Diagonal matrix 3x3
-3 0 0 0 2 0 0 0 3 
+3 0 0
+0 2 0
+0 0 3
 
 2: It's Diagonal matrix 4x4
-5 0 0 0 0 2 0 0 0 0 1 0 0 0 0 5 
+5 0 0 0
+0 2 0 0
+0 0 1 0
+0 0 0 5
 
 3: It's Diagonal matrix 3x3
-9 0 0 0 9 0 0 0 9 
+9 0 0
+0 9 0
+0 0 9
 
 4: It's Diagonal matrix 3x3
-121 0 0 0 144 0 0 0 169 
+121 0 0
+0 144 0
+0 0 169
 
 Only Diagonal matrix.
 0: 
 1: It's Diagonal matrix 3x3
-3 0 0 0 2 0 0 0 3 
+3 0 0
+0 2 0
+0 0 3
 
 2: It's Diagonal matrix 4x4
-5 0 0 0 0 2 0 0 0 0 1 0 0 0 0 5 
+5 0 0 0
+0 2 0 0
+0 0 1 0
+0 0 0 5
 
 3: It's Diagonal matrix 3x3
-9 0 0 0 9 0 0 0 9 
+9 0 0
+0 9 0
+0 0 9
 
 4: 
 5: 
 6: 
 7: 
 8: It's Diagonal matrix 3x3
-121 0 0 0 144 0 0 0 169 
+121 0 0
+0 144 0
+0 0 169
 
 Empty container. 
 Container contents 0 elements.

@@ -17,6 +17,10 @@ public:
 	virtual int Sum_of_elements() = 0;//подсчет суммы элементов в матрице
 	bool Compare_two_matrix(type *current);//сравнение двух матриц
 	static int Is_Numeral_Element_and_Skip_Strings(int repeat, ifstream &ifst);
+	virtual void Multimethod_first_element_type(type *current, ofstream &ofst) = 0;
+	virtual void Multimethod_first_diagonal(ofstream &ofst) = 0;
+	virtual void Multimethod_first_matrix(ofstream &ofst) = 0;
+	virtual void Multimethod_first_triagonal(ofstream &ofst) = 0;
 
 	int *object_data;//массив элементов матрицы
 	type *next_element;//указатель на следующий элемент
@@ -34,6 +38,7 @@ public:
 	void Sorting();//сортировка контейнера
 	void Filtred_out(ofstream &ofst);//фильтрованный вывод, первый вариант
 	void Output_only_diagonal(ofstream &ofst);//фильтрованный вывод, второй вариант
+	void Multimethod(ofstream &ofst);
 	container();//инициализация контейнера
 };
 
@@ -45,6 +50,11 @@ public:
 	void Output_single_element(ofstream &ofst); // вывод
 	int Sum_of_elements();
 	void Output_diagonal(ofstream &ofst);
+	void Multimethod_first_element_type(type *current, ofstream &ofst);
+	void Multimethod_first_diagonal(ofstream &ofst);
+	void Multimethod_first_matrix(ofstream &ofst);
+	void Multimethod_first_triagonal(ofstream &ofst);
+
 	diagonal() {} // создание без инициализации.
 };
 
@@ -55,6 +65,10 @@ public:
 	bool Input_objects_data(ifstream &ifst); // ввод
 	void Output_single_element(ofstream &ofst); // вывод
 	int Sum_of_elements();
+	void Multimethod_first_element_type(type *current, ofstream &ofst);
+	void Multimethod_first_diagonal(ofstream &ofst);
+	void Multimethod_first_matrix(ofstream &ofst);
+	void Multimethod_first_triagonal(ofstream &ofst);
 	matrix() {} // создание без инициализации.
 };
 
@@ -65,5 +79,9 @@ public:
 	bool Input_objects_data(ifstream &ifst); // ввод
 	void Output_single_element(ofstream &ofst); // вывод
 	int Sum_of_elements();
+	void Multimethod_first_element_type(type *current, ofstream &ofst);
+	void Multimethod_first_diagonal(ofstream &ofst);
+	void Multimethod_first_matrix(ofstream &ofst);
+	void Multimethod_first_triagonal(ofstream &ofst);
 	triagonal() {} // создание без инициализации.
 };
