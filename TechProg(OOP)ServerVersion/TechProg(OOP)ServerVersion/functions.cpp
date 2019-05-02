@@ -56,6 +56,25 @@ container::container()
 	len = 0;
 }
 
+void container::Multimetod(ofstream &ofst) {
+	ofst << "Multimethod." << endl;
+	type *First_point = current;
+	type *Second_point = First_point->next;
+	for (int i = 0; i < len - 1; i++) 
+	{
+		for (int j = i + 1; j < len; j++) 
+		{
+			First_point->Multimethod(Second_point, ofst);
+			First_point->Out(ofst, First_point);
+			Second_point->Out(ofst, Second_point);
+			Second_point = Second_point->next;
+		}
+		First_point = First_point->next;
+		Second_point = First_point->next;
+	}
+}
+
+
 type* type::In(ifstream &ifst, type *current)
 {
 
@@ -129,6 +148,21 @@ void diagonal::Out(ofstream &ofst, type *current)
 	ofst << endl;
 }
 
+void diagonal::Multimethod(type *current, ofstream &ofst)
+{
+	current->MMDiagonal(ofst);
+}
+
+void diagonal::MMDiagonal(ofstream &ofst)
+{
+	ofst << "Diagonal and Diagonal" << endl;
+}
+
+void diagonal::MMMatrix(ofstream &ofst)
+{
+	ofst << "Casual Matrix and Diagonal" << endl;
+}
+
 
 int * matrix::InData(ifstream &ifst)
 {
@@ -154,4 +188,19 @@ void matrix::Out(ofstream &ofst, type *current)
 		ofst << endl;
 	}
 	ofst << endl;
+}
+
+void matrix::Multimethod(type *current, ofstream &ofst)
+{
+	current->MMMatrix(ofst);
+}
+
+void matrix::MMDiagonal(ofstream &ofst)
+{
+	ofst << "Diagonal and Casual Matrix" << endl;
+}
+
+void matrix::MMMatrix(ofstream &ofst)
+{
+	ofst << "Casual Matrix and Casual Matrix" << endl;
 }
