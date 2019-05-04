@@ -17,10 +17,10 @@ public:
 	virtual int Sum_of_elements() = 0;//подсчет суммы элементов в матрице
 	bool Compare_two_matrix(type *current);//сравнение двух матриц
 	static int Is_Numeral_Element_and_Skip_Strings(int repeat, ifstream &ifst);
-	virtual void Multimethod_first_element_type(type *current, ofstream &ofst) = 0;
-	virtual void Multimethod_first_diagonal(ofstream &ofst) = 0;
-	virtual void Multimethod_first_matrix(ofstream &ofst) = 0;
-	virtual void Multimethod_first_triagonal(ofstream &ofst) = 0;
+	virtual void Multimethod_first_element_type(type *current, ofstream &ofst) = 0;//определение типа первого объекта
+	virtual void Multimethod_first_diagonal(ofstream &ofst) = 0;//определение типа второго объекта
+	virtual void Multimethod_first_matrix(ofstream &ofst) = 0;//определение типа второго объекта
+	virtual void Multimethod_first_triagonal(ofstream &ofst) = 0;//определение типа второго объекта
 
 	int *object_data;//массив элементов матрицы
 	type *next_element;//указатель на следующий элемент
@@ -38,16 +38,16 @@ public:
 	void Sorting();//сортировка контейнера
 	void Filtred_out(ofstream &ofst);//фильтрованный вывод, первый вариант
 	void Output_only_diagonal(ofstream &ofst);//фильтрованный вывод, второй вариант
-	void Multimethod(ofstream &ofst);
+	void Multimethod(ofstream &ofst);//мультиметод
 	container();//инициализация контейнера
 };
 
 class diagonal : public type {
-	int size_of_matrix;
-	int *matrix_mass;
+	int size_of_matrix;//размер матрицы
+	int *matrix_mass;//массив для элементов матрицы
 public:
-	bool Input_objects_data(ifstream &ifst); // ввод
-	void Output_single_element(ofstream &ofst); // вывод
+	bool Input_objects_data(ifstream &ifst); // ввод одного объекта
+	void Output_single_element(ofstream &ofst); // вывод одного объекта
 	int Sum_of_elements();
 	void Output_diagonal(ofstream &ofst);
 	void Multimethod_first_element_type(type *current, ofstream &ofst);
@@ -59,11 +59,11 @@ public:
 };
 
 class matrix : public type {
-	int size_of_matrix;
-	int *matrix_mass;
+	int size_of_matrix;//размер матрицы
+	int *matrix_mass;//массив для элементов матрицы
 public:
-	bool Input_objects_data(ifstream &ifst); // ввод
-	void Output_single_element(ofstream &ofst); // вывод
+	bool Input_objects_data(ifstream &ifst); // ввод одного объекта
+	void Output_single_element(ofstream &ofst); // вывод одного объекта
 	int Sum_of_elements();
 	void Multimethod_first_element_type(type *current, ofstream &ofst);
 	void Multimethod_first_diagonal(ofstream &ofst);
@@ -73,11 +73,11 @@ public:
 };
 
 class triagonal : public type {
-	int size_of_matrix;
-	int *matrix_mass;
+	int size_of_matrix;//размер матрицы
+	int *matrix_mass;//массив для элементов матрицы
 public:
-	bool Input_objects_data(ifstream &ifst); // ввод
-	void Output_single_element(ofstream &ofst); // вывод
+	bool Input_objects_data(ifstream &ifst); // ввод одного объекта
+	void Output_single_element(ofstream &ofst); // вывод одного объекта
 	int Sum_of_elements();
 	void Multimethod_first_element_type(type *current, ofstream &ofst);
 	void Multimethod_first_diagonal(ofstream &ofst);
